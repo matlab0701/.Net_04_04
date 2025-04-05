@@ -21,6 +21,14 @@ public class DataContext(DbContextOptions<DataContext> options) : DbContext(opti
         .WithMany(g => g.Books)
         .HasForeignKey(b => b.GenreId);
 
+        modelBuilder.Entity<Book>(en=>
+        {
+           en.HasKey(b=>b.Id);
+           en.HasIndex(b=>b.ISBN).IsUnique();
+           en.Property(b=> b.Title).IsRequired().HasMaxLength(250);
+
+        });
+
     }
 
 
